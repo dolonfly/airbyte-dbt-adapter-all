@@ -52,3 +52,6 @@ RUN python -m pip install dbt-core dbt-redshift dbt-bigquery dbt_snowflake dbt_s
 
 # https://github.com/dbeatty10/dbt-mysql
 RUN python -m pip install dbt-mysql
+
+# other for airbyte
+RUN python -m pip install mashumaro
