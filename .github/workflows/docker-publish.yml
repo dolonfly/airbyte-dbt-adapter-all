@@ -35,16 +35,17 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Set env
         run: echo "DATE=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Build and push
+      - name: Build and push for dbt-mysql
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
           target: dbt-mysql
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-mysql:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-mysql:${{ env.DATE }}
           push: true
-      - name: Build and push
+      - name: Build and push for dbt-postgres
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
+          target: dbt-postgres
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-postgres:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-postgres:${{ env.DATE }}
           push: true
