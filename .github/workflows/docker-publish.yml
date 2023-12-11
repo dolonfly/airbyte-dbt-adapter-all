@@ -39,5 +39,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:${{ env.DATE }}-1
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:${{ env.DATE }}-2
           push: true
