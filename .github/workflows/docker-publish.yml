@@ -39,5 +39,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-adapter-all:${{ env.DATE }}-4
+          target: dbt-mysql
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-mysql:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-mysql:${{ env.DATE }}
+          push: true
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-postgres:latest,${{ secrets.DOCKERHUB_USERNAME }}/airbyte-dbt-postgres:${{ env.DATE }}
           push: true
