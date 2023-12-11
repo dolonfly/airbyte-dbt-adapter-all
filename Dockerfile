@@ -1,12 +1,6 @@
 # Top level build args
 ARG build_for=linux/amd64
-
-##
-# base image (abstract)
-##
-# Please do not upgrade beyond python3.10.7 currently as dbt-spark does not support
-# 3.11py and images do not get made properly
-FROM --platform=$build_for python:3.10.7-slim-bullseye as base
+FROM --platform=$build_for python:3.9-slim-bullseye as base
 
 # System setup
 RUN apt-get update \
@@ -36,10 +30,6 @@ RUN python -m pip install --upgrade pip setuptools wheel --no-cache-dir
 WORKDIR /usr/app/dbt/
 ENTRYPOINT ["dbt"]
 
-##
-# dbt-all
-##
-FROM base as dbt-all
 RUN apt-get update \
   && apt-get dist-upgrade -y \
   && apt-get install -y --no-install-recommends \
@@ -56,11 +46,9 @@ RUN apt-get update \
     /tmp/* \
     /var/tmp/*
 
-# https://github.com/dbeatty10/dbt-mysql
-RUN python -m pip install dbt-mysql
-
 # https://docs.getdbt.com/docs/core/connect-data-platform/about-core-connections
 RUN python -m pip install dbt-core dbt-redshift dbt-bigquery dbt_snowflake dbt_spark dbt_postgres
 
 
-
+# https://github.com/dbeatty10/dbt-mysql
+RUN python -m pip install dbt-mysql
