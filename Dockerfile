@@ -56,10 +56,11 @@ RUN apt-get update \
     /tmp/* \
     /var/tmp/*
 
+# https://github.com/dbeatty10/dbt-mysql
+RUN python -m pip install dbt-mysql
+
 # https://docs.getdbt.com/docs/core/connect-data-platform/about-core-connections
 RUN python -m pip install dbt-core dbt-redshift dbt-bigquery dbt_snowflake dbt_spark dbt_postgres
 
-# https://github.com/dbeatty10/dbt-mysql
-RUN python -m pip install dbt-mysql
 
 
